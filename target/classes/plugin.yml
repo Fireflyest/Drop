@@ -1,8 +1,8 @@
-# Auto-generated plugin.yml, generated at 2020/04/26 19:12:37 by org.bukkit.plugin.java.annotation.PluginAnnotationProcessor
+# Auto-generated plugin.yml, generated at 2020/04/26 20:46:15 by org.bukkit.plugin.java.annotation.PluginAnnotationProcessor
 
 main: com.fireflyest.drop.Drop
 name: Drop
-version: 1.0.2
+version: 1.1.0
 author: Fireflyest
 commands:
   drop:
