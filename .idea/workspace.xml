@@ -14,6 +14,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -36,6 +39,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/fireflyest/drop" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -86,6 +90,10 @@
     </state>
     <state x="574" y="113" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587090688902" />
     <state x="620" y="118" key="#com.intellij.ide.util.MemberChooser/74.0.1462.864@74.0.1462.864" timestamp="1587898369929" />
+    <state x="446" y="25" key="CommitChangelistDialog2" timestamp="1587903587246">
+      <screen x="74" y="0" width="1462" height="864" />
+    </state>
+    <state x="446" y="25" key="CommitChangelistDialog2/74.0.1462.864@74.0.1462.864" timestamp="1587903587246" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1587121701236">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -122,6 +130,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1587045757589" />
+    <state x="599" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587903517815">
+      <screen x="74" y="0" width="1462" height="864" />
+    </state>
+    <state x="599" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/74.0.1462.864@74.0.1462.864" timestamp="1587903517815" />
     <state x="535" y="115" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1587120788406">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

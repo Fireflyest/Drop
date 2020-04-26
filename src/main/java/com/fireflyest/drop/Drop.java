@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.author.Author;
 import org.bukkit.scheduler.BukkitRunnable;
 
-@Plugin(name="Drop", version="1.0.2")
+@Plugin(name="Drop", version="1.1.0")
 @Author(value = "Fireflyest")
 @Command(name = "drop", usage = "/drop <reload|help|default>",
         permission = "drop.use", permissionMessage = "§6▶§f你没有使用该指令的权限§3 drop.use")
