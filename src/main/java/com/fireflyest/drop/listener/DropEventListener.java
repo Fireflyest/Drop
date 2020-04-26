@@ -1,6 +1,7 @@
 package com.fireflyest.drop.listener;
 
 import com.fireflyest.drop.data.Language;
+import com.fireflyest.drop.event.ItemDropOnGroundEvent;
 import com.fireflyest.drop.manager.DropManager;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -56,7 +57,7 @@ public class DropEventListener implements Listener {
         if(event.isCancelled())return;
         if(!"#DROP".equals(event.getRightClicked().getCustomName()))return;
         ArmorStand drop = event.getRightClicked();
-        Player player = (Player)event.getPlayer();
+        Player player = event.getPlayer();
         if(!DropManager.pickUpDrop(player, drop)){
             player.sendMessage(Language.FULL_INV);
             return;
@@ -69,5 +70,10 @@ public class DropEventListener implements Listener {
         if(event.isCancelled())return;
         DropManager.pickDrop(event.getPlayer());
     }
+
+//    @EventHandler
+//    public void onItemDropOnGround(ItemDropOnGroundEvent event){
+//        System.out.println(event.getItem().getItemStack().getType().name()+":"+event.getItem().getItemStack().getAmount());
+//    }
 
 }

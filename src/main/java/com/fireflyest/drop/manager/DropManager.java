@@ -3,13 +3,13 @@ package com.fireflyest.drop.manager;
 import com.fireflyest.drop.Drop;
 import com.fireflyest.drop.data.Config;
 import com.fireflyest.drop.data.Language;
+import com.fireflyest.drop.event.ItemDropOnGroundEvent;
 import com.fireflyest.drop.event.PlayerPickUpItemEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.*;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
@@ -25,6 +25,7 @@ public class DropManager {
     public static void placeOnGround(Item item, ArmorStand drop){
         new BukkitRunnable() {
             DropType type = getDropType(item.getItemStack().getType().name());
+            ItemDropOnGroundEvent event = new ItemDropOnGroundEvent(item, drop);
             @Override
             public void run() {
                 if(item.getItemStack().getAmount() == 0){
@@ -32,35 +33,44 @@ public class DropManager {
                     return;
                 }
                 if(item.isOnGround()){
-                    if(drop.isDead()){
+                    event.setType(type);
+                    Bukkit.getPluginManager().callEvent(event);
+                    if(event.getDrop().isDead()){
+                        event.setCancelled(true);
                         cancel();
                         return;
                     }
-                    if(item.getLocation().add(0, -0.5, 0).getBlock().getType().name().contains("CHEST")){
+                    if(event.isCancelled()){
+                        event.getDrop().remove();
+                        cancel();
+                        return;
+                    }
+                    if(event.getItem().getLocation().add(0, -0.5, 0).getBlock().getType().name().contains("CHEST")){
+                        event.getDrop().remove();
                         cancel();
                         return;
                     }
                     switch (type){
                         case LONGER:
-                            drop.setHelmet(item.getItemStack());
-                            drop.setHeadPose(new EulerAngle(1.57, 0, 0));
-                            drop.teleport(item.getLocation().add(0, -DropType.LONGER.height, 0));
-                            item.remove();
-                            dropGravity(drop, DropType.LONGER);
+                            event.getDrop().setHelmet(event.getItem().getItemStack());
+                            event.getDrop().setHeadPose(new EulerAngle(1.57, 0, 0));
+                            event.getDrop().teleport(event.getItem().getLocation().add(0, -DropType.LONGER.height, 0));
+                            event.getItem().remove();
+                            dropGravity(event.getDrop(), event.getType());
                             break;
                         case NORMAL:
-                            drop.setItemInHand(item.getItemStack());
-                            drop.setRightArmPose(new EulerAngle(0, -1.57, 0));
-                            drop.teleport(item.getLocation().add(0, -DropType.NORMAL.height, 0));
-                            item.remove();
-                            dropGravity(drop, DropType.NORMAL);
+                            event.getDrop().setItemInHand(event.getItem().getItemStack());
+                            event.getDrop().setRightArmPose(new EulerAngle(0, -1.57, 0));
+                            event.getDrop().teleport(event.getItem().getLocation().add(0, -DropType.NORMAL.height, 0));
+                            event.getItem().remove();
+                            dropGravity(event.getDrop(), event.getType());
                             break;
                         case BONE:
-                            drop.setHelmet(item.getItemStack());
-                            drop.setHeadPose(new EulerAngle(1.57, 0, 0));
-                            drop.teleport(item.getLocation().add(0, -DropType.BONE.height, 0));
-                            item.remove();
-                            dropGravity(drop, DropType.BONE);
+                            event.getDrop().setHelmet(event.getItem().getItemStack());
+                            event.getDrop().setHeadPose(new EulerAngle(1.57, 0, 0));
+                            event.getDrop().teleport(event.getItem().getLocation().add(0, -DropType.BONE.height, 0));
+                            event.getItem().remove();
+                            dropGravity(event.getDrop(), event.getType());
                             break;
                         case QUADRATE:
                             cancel();
@@ -135,9 +145,6 @@ public class DropManager {
         if(i == 0 || item.getAmount() <= i){//直接拾取
             drop.setCustomName("#DROP_PICK");
             event = new PlayerPickUpItemEvent(player, item, 0);
-            Bukkit.getPluginManager().callEvent(event);
-            if(event.isCancel()) return false;
-            player.getInventory().addItem(event.getItem());
         }else {
             ItemStack clone = item.clone();
             clone.setAmount(i);
@@ -147,10 +154,10 @@ public class DropManager {
                 player.getWorld().dropItem(player.getLocation(), item);
             }
             event = new PlayerPickUpItemEvent(player, clone, reaming);
-            Bukkit.getPluginManager().callEvent(event);
-            if(event.isCancel()) return false;
-            player.getInventory().addItem(event.getItem());
         }
+        Bukkit.getPluginManager().callEvent(event);
+        if(event.isCancelled()) return false;
+        player.getInventory().addItem(event.getItem());
         drop.remove();
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 2, 2);
         return true;
@@ -195,21 +202,6 @@ public class DropManager {
         ){ return DropType.LONGER; }
         else if(name.equals("BONE")){ return DropType.BONE; }
         return DropType.NORMAL;
-    }
-
-    public enum DropType{
-        NORMAL(0, 0.70),
-        LONGER(1, 1.60),
-        QUADRATE(2, 0.0),
-        BONE(3, 1.07);
-
-        private int id;
-        private double height;
-
-        DropType(int id, double height) {
-            this.id = id;
-            this.height = height;
-        }
     }
 
 }
