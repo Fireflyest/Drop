@@ -1,0 +1,13 @@
+Version: '1.0.0-SNAPSHOT'
+Title: '&6▶&r'
+Help:
+  - ' drop reload'
+  - ' drop default'
+  - ' drop help'
+PlayerCommand: '&c该指令只能由玩家使用!'
+Reloading: '&f配置文件重载中...'
+Reloaded: '&f配置文件重载完成!'
+FullInv: '&f你的背包已满'
+ClearTick: '&330&f秒后清理落地物品'
+Clearing: '&f正在清理掉落物'
+ClearAmount: '&f清理了&3%amount%&f个掉落物'

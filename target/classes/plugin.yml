@@ -1,0 +1,14 @@
+# Auto-generated plugin.yml, generated at 2020/04/26 19:12:37 by org.bukkit.plugin.java.annotation.PluginAnnotationProcessor
+
+main: com.fireflyest.drop.Drop
+name: Drop
+version: 1.0.2
+author: Fireflyest
+commands:
+  drop:
+    permission: drop.use
+    permission-message: §6▶§f你没有使用该指令的权限§3 drop.use
+    usage: /drop <reload|help|default>
+  d: {}
+permissions: {}
+api-version: '1.14'
